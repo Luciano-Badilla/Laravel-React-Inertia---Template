@@ -19,7 +19,8 @@ export default defineConfig(({ mode }) => {
         ],
         resolve: {
             alias: {
-                shadcn: path.resolve(__dirname, "shadcn")
+                shadcn: path.resolve(__dirname, "shadcn"),
+                components: path.resolve(__dirname, "resources/js/Components"),
             }
         },
         server: {

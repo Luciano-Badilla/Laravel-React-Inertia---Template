@@ -1,11 +1,17 @@
 <?php
 
-use App\Http\Controllers\AdminPanel;
-use App\Http\Controllers\AppointmentForm;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\WhatsAppController;
+use App\Models\Chat;
+use App\Models\Message;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+// routes/api.php
+use App\Http\Controllers\BotFlowController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +24,23 @@ use Inertia\Inertia;
 |
 */
 
-
-
-Route::get('/welcome', function () {
-    return Inertia::render('Welcome');
+Route::get('/test-broadcast', function () {
+    broadcast(new \App\Events\NewMessage(Chat::first(), Message::first()));
+    return "Evento enviado";
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    });
+
+
+    // routes/web.php
+    Route::get('/chat-panel', [ChatController::class, 'index']);
+
+    Route::get('/bot/flows', [BotFlowController::class, 'index']);
+    
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
