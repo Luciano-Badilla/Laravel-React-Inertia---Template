@@ -14,14 +14,15 @@ return new class extends Migration
         // Crear la tabla 'users' con los campos extendidos.
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // ID autoincremental
-            $table->string('name'); // Nombre y apellido
+            $table->string('name_and_surname'); // Nombre y apellido
             $table->string('email')->unique(); // Correo electrónico único
+            $table->timestamp('email_verified_at')->nullable(); // Fecha de verificación de correo
             $table->string('password'); // Contraseña
             $table->string('remember_token', 100)->nullable(); // Token de recordatorio
             $table->timestamps(); // Timestamps (created_at, updated_at)
-            $table->boolean('validated')->default(0); // Validado (0 o 1)
-            $table->boolean('requestsPassword')->default(0); // Solicitar contraseña (0 o 1)
-            $table->integer('role_id')->default(0);
+            $table->binary('validated')->default(0); // Validado (0 o 1)
+            $table->binary('requestsPassword')->default(0); // Solicitar contraseña (0 o 1)
+            $table->integer('role_id');
         });
 
         // Crear la tabla 'password_reset_tokens'.

@@ -6,11 +6,10 @@
   "tailwind": {
     "config": "tailwind.config.js",
     "css": "resources/css/app.css",
-    "baseColor": "neutral",
+    "baseColor": "slate",
     "cssVariables": true,
     "prefix": ""
   },
-  "iconLibrary": "lucide",
   "aliases": {
     "components": "shadcn/components",
     "utils": "shadcn/lib/utils",
@@ -18,5 +17,5 @@
     "lib": "shadcn/lib",
     "hooks": "shadcn/hooks"
   },
-  "registries": {}
+  "iconLibrary": "lucide"
 }
