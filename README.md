@@ -60,7 +60,7 @@ npm --version
 
 ```bash
 git clone <URL_DEL_REPOSITORIO>
-cd seguimiento_de_confirmaciones
+cd <NOMBRE_DE_LA_CARPETA>
 ```
 
 2. Instalar las dependencias de PHP:
