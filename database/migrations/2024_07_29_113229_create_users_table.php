@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('password'); // Contraseña
             $table->string('remember_token', 100)->nullable(); // Token de recordatorio
             $table->timestamps(); // Timestamps (created_at, updated_at)
-            $table->binary('validated')->default(0); // Validado (0 o 1)
-            $table->binary('requestsPassword')->default(0); // Solicitar contraseña (0 o 1)
+            $table->boolean('validated')->default(false); // Validado (0 o 1)
+            $table->boolean('requestsPassword')->default(false); // Solicitar contraseña (0 o 1)
             $table->integer('role_id');
         });
 
