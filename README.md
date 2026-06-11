@@ -4,10 +4,10 @@ Template web construido con Laravel 10, Inertia.js, React, Vite y Tailwind CSS.
 
 ## Requisitos
 
-- PHP 8.1 o superior
-- Composer
-- Node.js y npm
-- MySQL
+* PHP 8.1 o superior
+* Composer
+* Node.js y npm
+* MySQL
 
 ## Instalar Composer
 
@@ -146,6 +146,47 @@ Antes de publicar, configurar el archivo `.env` de producción y ejecutar:
 php artisan migrate --force
 php artisan optimize
 ```
+
+## Posible error: rutas duplicadas en Inertia
+
+En algunos entornos puede ocurrir que las rutas generadas por Inertia aparezcan duplicadas, por ejemplo:
+
+```text
+http://localhost/proyecto/public/proyecto/public/login
+```
+
+Esto suele suceder cuando la aplicación se ejecuta dentro de un subdirectorio (por ejemplo con Laragon, XAMPP o Apache configurado con una carpeta virtual).
+
+Si esto sucede, revisar el archivo:
+
+```text
+/vendor/inertiajs/inertia-laravel/src/Response.php
+```
+
+Buscar el siguiente bloque:
+
+```php
+$page = [
+    'component' => $this->component,
+    'props' => $props,
+    //'url' => $request->getBaseUrl().$request->getRequestUri(),
+    'url' => $request->getRequestUri(),
+    'version' => $this->version,
+];
+```
+
+Y verificar que quede exactamente así:
+
+```php
+$page = [
+    'component' => $this->component,
+    'props' => $props,
+    'url' => $request->getRequestUri(),
+    'version' => $this->version,
+];
+```
+
+> **Importante:** este cambio se realiza dentro de la carpeta `vendor`, por lo que puede perderse al ejecutar nuevamente `composer install` o `composer update`. Si el problema reaparece, volver a aplicar la modificación.
 
 ## Comandos útiles
 
